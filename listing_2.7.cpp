@@ -1,23 +1,26 @@
-#include <vector>
 #include <thread>
+#include <stdio.h>
+#include <vector>
 #include <algorithm>
 #include <functional>
+#include <string>
+#include <fstream>
+#include <iostream>
+#include <utility>
 
-void do_work(unsigned id)
-{}
+using namespace std;
 
-void f()
-{
-    std::vector<std::thread> threads;
-    for(unsigned i=0;i<20;++i)
-    {
-        threads.push_back(std::thread(do_work,i));
-    }
-    std::for_each(threads.begin(),threads.end(),
-        std::mem_fn(&std::thread::join));
+void do_work(unsigned id) {
+	cout << id << endl;
 }
 
-int main()
-{
-    f();
+void f() {
+	vector<thread> threads;
+	for (unsigned i = 0; i<20; ++i)
+		threads.push_back(thread(do_work, i));
+	for_each(threads.begin(), threads.end(), mem_fn(&thread::join));
+}
+
+int main() {
+	f();
 }
